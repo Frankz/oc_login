@@ -1,0 +1,7 @@
+{
+  "name": "oc-login",
+  "version": "0.0.1",
+  "description": "Add a custom message here about your oc-login",
+  "scripts": [ "oc-login.sh" ],
+  "install": "make install"
+}
