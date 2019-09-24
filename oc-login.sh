@@ -7,18 +7,27 @@ function oc-login () {
   # @Param $4 = OCP_PASS OCP client password
   if [[ -z $1 ]]; then
     echo "Must include a param with a file to read"
-    return 1
-    exit 
+    echo "Search in $HOME/.list.csv"
+    if [[ -e $HOME/.list.csv ]]; then
+      FILE_TO_READ=$HOME/.list.csv
+      echo "Using $FILE_TO_READ"
+    else
+      echo "There isn't file to read. EXIT"
+      return 1
+      exit 
+    fi
+  else
+    if [[ -e $1 ]]; then
+      :
+    else
+      echo "The param isn't a file"
+      return 1
+      exit 
+    fi
   fi
-  
-  if [[ -e $1 ]]; then
-    :
-   else
-    echo "The param isn't a file"
-    return 1
-    exit 
-  fi
-  fileContent=$(_readFile $1)
+
+  FILE_TO_READ="${1:-$FILE_TO_READ}"
+  fileContent=$(_readFile $FILE_TO_READ)
   echo -e $fileContent
   OCP_HOST=$(_hostMenu $fileContent)
   echo "You has been selected \"$OCP_HOST\""
