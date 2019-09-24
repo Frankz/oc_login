@@ -45,7 +45,7 @@ function oc-login () {
 }
 
 function _hostMenu () {
-  read -p "Choose an option:" OPTION
+  read -p "Choose an option: " OPTION
   OPTION=$(echo -e $fileContent | grep ^$OPTION | cut -d"," -f1 | cut -d" " -f3)
   echo $OPTION
 }
